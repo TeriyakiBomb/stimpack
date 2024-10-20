@@ -32,19 +32,18 @@
       <button
         id="button"
         class="bg-red-500"
-        data-controller="tooltip"
-        data-action="click->tooltip#toggle"
-        data-tooltip-position-value="top"
+        data-controller="popover"
+        data-action="click->popover#toggle"
       >
         My button
         <div
           id="tooltip"
           role="tooltip"
           class="rounded-xl p-4"
-          data-tooltip-target="popover"
+          data-popover-target="popover"
         >
           My tooltip
-          <div id="arrow" data-tooltip-target="arrow"></div>
+          <div id="arrow" data-popover-target="arrow"></div>
         </div>
       </button>
     </div>

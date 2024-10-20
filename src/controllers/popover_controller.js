@@ -6,24 +6,25 @@ export default class extends Controller {
 
   static values = {
     position: { type: String, default: "bottom" },
+    offset: { type: Number, default: 20 },
   }
 
   toggle() {
     const popover = this.popoverTarget
     popover.style.display = popover.style.display === "none" ? "block" : "none"
     if (popover.style.display === "block") {
-      this.updatePosition()
+      this.popover()
     }
   }
 
-  updatePosition() {
+  popover() {
     const button = this.element
     const popover = this.popoverTarget
     const arrowElement = this.arrowTarget
 
     computePosition(button, popover, {
       placement: this.positionValue,
-      middleware: [arrow({ element: arrowElement }), offset(20)],
+      middleware: [arrow({ element: arrowElement }), offset(this.offsetValue)],
     }).then(({ x, y, placement, middlewareData }) => {
       Object.assign(popover.style, {
         left: `${x}px`,
