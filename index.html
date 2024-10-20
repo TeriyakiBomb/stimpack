@@ -5,30 +5,50 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+
+    <style>
+      #tooltip {
+        width: max-content;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #222;
+        color: white;
+        font-weight: bold;
+        font-size: 90%;
+        display: none; /* Initially hidden */
+      }
+      #arrow {
+        position: absolute;
+        background: #222;
+        width: 16px;
+        height: 16px;
+        transform: rotate(45deg);
+      }
+    </style>
   </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="src/main.js"></script>
-    <form class="max-w-xs mx-auto" data-controller="hello">
-      <div class="flex gap-2">
-        <label for="your-name" class="sr-only"> Your Name </label>
-        <input
-          id="your-name"
-          type="text"
-          placeholder="Enter your name"
-          class="border dark:border-zinc-500 rounded p-2 flex-1"
-          data-hello-target="input"
-          data-action="keyup->hello#handleKeyup"
-        />
-        <button
-          class="bg-sky-600 hover:bg-sky-800 text-white px-4 py-2 rounded disabled:bg-zinc-300 disabled:text-zinc-500 dark:disabled:bg-zinc-700 disabled:cursor-not-allowed"
-          data-hello-target="button"
-          data-action="hello#greet:prevent"
+  <body class="p-96">
+    <div>
+      <button
+        id="button"
+        class="bg-red-500"
+        data-controller="tooltip"
+        data-action="click->tooltip#toggle"
+        data-tooltip-position-value="top"
+      >
+        My button
+        <div
+          id="tooltip"
+          role="tooltip"
+          class="rounded-xl p-4"
+          data-tooltip-target="popover"
         >
-          Greet
-        </button>
-      </div>
-      <p class="mt-2" data-hello-target="output">&nbsp;</p>
-    </form>
+          My tooltip
+          <div id="arrow" data-tooltip-target="arrow"></div>
+        </div>
+      </button>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
   </body>
 </html>
