@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { computePosition, arrow, offset } from "@floating-ui/dom"
-import { useClickOutside } from "stimulus-use"
+import { useClickOutside, useHover } from "stimulus-use"
 
 // TODO: Switch to tailwind showing and hiding
 
@@ -10,9 +10,24 @@ export default class extends Controller {
   static values = {
     position: { type: String, default: "bottom" },
     offset: { type: Number, default: 20 },
+    mode: { type: String, default: "hover" },
+    delay: { type: Number, default: 0 },
   }
   connect() {
     useClickOutside(this)
+    useHover(this, { element: this.element })
+  }
+
+  mouseEnter() {
+    if (this.modeValue === "hover") {
+      this.show()
+    }
+  }
+
+  mouseLeave() {
+    if (this.modeValue === "hover") {
+      this.hide()
+    }
   }
 
   toggle() {
@@ -24,12 +39,15 @@ export default class extends Controller {
   }
 
   show() {
-    this.popoverTarget.style.display = "block"
-    this.popover()
+    this.hoverTimer = setTimeout(() => {
+      this.popoverTarget.style.display = "block"
+      this.popover()
+    }, this.delayValue)
   }
 
   hide() {
     this.popoverTarget.style.display = "none"
+    clearTimeout(this.hoverTimer)
   }
 
   clickOutside(event) {

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -31,11 +31,13 @@
     <div>
       <button
         id="button"
-        class="bg-red-500"
+        class="bg-red-500 p-5"
         data-controller="popover"
-        data-action="click->popover#show"
-        data-popover-position-value="top"
+        data-action="popover#show"
+        data-popover-position-value="bottom"
         data-popover-offset-value="20"
+        data-popover-delay-value="0"
+        data-popover-mode-value="click"
       >
         My button
         <div
