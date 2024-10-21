@@ -8,9 +8,10 @@ export default class extends Controller {
   static values = {
     position: { type: String, default: "bottom" },
     offset: { type: Number, default: 20 },
-    mode: { type: String },
+    mode: String,
     delay: { type: Number, default: 0 },
     delayOut: { type: Number, default: 0 },
+    closeOutside: { type: Boolean, default: true },
   }
 
   connect() {
@@ -70,7 +71,9 @@ export default class extends Controller {
   }
 
   clickOutside(event) {
-    this.hideImmediately()
+    if (this.closeOutsideValue === true) {
+      this.hideImmediately()
+    }
   }
 
   popover() {
