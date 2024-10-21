@@ -63,8 +63,14 @@ export default class extends Controller {
     }, this.delayOutValue)
   }
 
+  hideImmediately() {
+    this.contentTarget.dataset.state = "closed"
+    this.contentTarget.classList.add("opacity-0")
+    this.contentTarget.classList.remove("opacity-100")
+  }
+
   clickOutside(event) {
-    this.hide()
+    this.hideImmediately()
   }
 
   popover() {
