@@ -12,10 +12,13 @@ export default class extends Controller {
     offset: { type: Number, default: 20 },
     mode: { type: String, default: "hover" },
     delay: { type: Number, default: 0 },
+    delayOut: { type: Number, default: 0 },
   }
   connect() {
     useClickOutside(this)
     useHover(this, { element: this.element })
+    this.popoverTarget.setAttribute("data-state", "closed")
+    // console.log(this.popoverTarget.dataset.state)
   }
 
   mouseEnter() {
@@ -32,22 +35,28 @@ export default class extends Controller {
 
   toggle() {
     const popover = this.popoverTarget
-    popover.style.display = popover.style.display === "none" ? "block" : "none"
-    if (popover.style.display === "block") {
-      this.popover()
+    if (popover.dataset.state === "closed") {
+      this.show()
+    } else {
+      this.hide()
     }
   }
 
   show() {
-    this.hoverTimer = setTimeout(() => {
+    setTimeout(() => {
       this.popoverTarget.style.display = "block"
+      this.popoverTarget.dataset.state = "open"
+      // console.log(`changed to ${this.popoverTarget.dataset.state}`)
       this.popover()
     }, this.delayValue)
   }
 
   hide() {
-    this.popoverTarget.style.display = "none"
-    clearTimeout(this.hoverTimer)
+    setTimeout(() => {
+      this.popoverTarget.style.display = "none"
+      this.popoverTarget.dataset.state = "closed"
+      // console.log(`changed to ${this.popoverTarget.dataset.state}`)
+    }, this.delayOutValue)
   }
 
   clickOutside(event) {
