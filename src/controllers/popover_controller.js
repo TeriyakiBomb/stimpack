@@ -2,8 +2,6 @@ import { Controller } from "@hotwired/stimulus"
 import { computePosition, arrow, offset } from "@floating-ui/dom"
 import { useClickOutside, useHover } from "stimulus-use"
 
-// TODO: Switch to tailwind showing and hiding
-
 export default class extends Controller {
   static targets = ["popover", "arrow"]
 
@@ -14,10 +12,14 @@ export default class extends Controller {
     delay: { type: Number, default: 0 },
     delayOut: { type: Number, default: 0 },
   }
+
+  initialize() {}
+
   connect() {
     useClickOutside(this)
     useHover(this, { element: this.element })
     this.popoverTarget.setAttribute("data-state", "closed")
+    this.popoverTarget.style.display = "block"
     // console.log(this.popoverTarget.dataset.state)
   }
 
@@ -44,8 +46,10 @@ export default class extends Controller {
 
   show() {
     setTimeout(() => {
-      this.popoverTarget.style.display = "block"
+      // this.popoverTarget.style.display = "block"
       this.popoverTarget.dataset.state = "open"
+      this.popoverTarget.classList.add("opacity-100")
+      this.popoverTarget.classList.remove("opacity-0")
       // console.log(`changed to ${this.popoverTarget.dataset.state}`)
       this.popover()
     }, this.delayValue)
@@ -53,8 +57,10 @@ export default class extends Controller {
 
   hide() {
     setTimeout(() => {
-      this.popoverTarget.style.display = "none"
+      // this.popoverTarget.style.display = "none"
       this.popoverTarget.dataset.state = "closed"
+      this.popoverTarget.classList.add("opacity-0")
+      this.popoverTarget.classList.remove("opacity-100")
       // console.log(`changed to ${this.popoverTarget.dataset.state}`)
     }, this.delayOutValue)
   }

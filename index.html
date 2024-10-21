@@ -5,34 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
-
-    <style>
-      #tooltip {
-        width: max-content;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: #222;
-        color: white;
-        font-weight: bold;
-        font-size: 90%;
-        display: none; /* Initially hidden */
-      }
-      #arrow {
-        position: absolute;
-        background: #222;
-        width: 16px;
-        height: 16px;
-        transform: rotate(45deg);
-      }
-    </style>
   </head>
-  <body class="p-96">
+  <body class="p-96 bg-gray-100">
     <div>
       <button
-        id="button"
-        class="bg-red-500 p-5"
         data-controller="popover"
+        class="bg-indigo-500 px-4 py-3 rounded-xl"
         data-action="popover#show"
         data-popover-position-value="bottom"
         data-popover-offset-value="20"
@@ -40,15 +18,19 @@
         data-popover-delay-out-value="0"
         data-popover-mode-value="hover"
       >
-        My button
+        <span class="text-white font-medium">Popover!</span>
         <div
-          id="tooltip"
           role="tooltip"
-          class="rounded-xl p-4"
+          class="rounded-xl p-4 absolute top-0 left-0 bg-white dark:bg-stone-800 shadow max-w-96 transition-opacity duration-300 opacity-0 hidden"
           data-popover-target="popover"
         >
-          My tooltip
-          <div id="arrow" data-popover-target="arrow"></div>
+          Nisi aute magna pariatur cupidatat irure aliqua quis sunt. Adipisicing
+          tempor ullamco sit ipsum consequat duis veniam Lorem. Lorem enim
+          voluptate non ea esse ipsum laborum.
+          <div
+            class="absolute size-5 bg-white dark:bg-stone-800 rotate-45"
+            data-popover-target="arrow"
+          ></div>
         </div>
       </button>
     </div>
