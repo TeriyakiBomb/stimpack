@@ -3,24 +3,22 @@ import { computePosition, arrow, offset } from "@floating-ui/dom"
 import { useClickOutside, useHover } from "stimulus-use"
 
 export default class extends Controller {
-  static targets = ["popover", "arrow"]
+  static targets = ["button", "content", "arrow"]
 
   static values = {
     position: { type: String, default: "bottom" },
     offset: { type: Number, default: 20 },
-    mode: { type: String, default: "hover" },
+    mode: { type: String },
     delay: { type: Number, default: 0 },
     delayOut: { type: Number, default: 0 },
   }
 
-  initialize() {}
-
   connect() {
     useClickOutside(this)
-    useHover(this, { element: this.element })
-    this.popoverTarget.setAttribute("data-state", "closed")
-    this.popoverTarget.style.display = "block"
-    // console.log(this.popoverTarget.dataset.state)
+    useHover(this, { element: this.buttonTarget })
+    this.contentTarget.setAttribute("data-state", "closed")
+    this.contentTarget.style.display = "block"
+    // console.log(this.contentTarget.dataset.state)
   }
 
   mouseEnter() {
@@ -36,7 +34,7 @@ export default class extends Controller {
   }
 
   toggle() {
-    const popover = this.popoverTarget
+    const popover = this.contentTarget
     if (popover.dataset.state === "closed") {
       this.show()
     } else {
@@ -46,22 +44,22 @@ export default class extends Controller {
 
   show() {
     setTimeout(() => {
-      // this.popoverTarget.style.display = "block"
-      this.popoverTarget.dataset.state = "open"
-      this.popoverTarget.classList.add("opacity-100")
-      this.popoverTarget.classList.remove("opacity-0")
-      // console.log(`changed to ${this.popoverTarget.dataset.state}`)
+      // this.contentTarget.style.display = "block"
+      this.contentTarget.dataset.state = "open"
+      this.contentTarget.classList.add("opacity-100")
+      this.contentTarget.classList.remove("opacity-0")
+      // console.log(`changed to ${this.contentTarget.dataset.state}`)
       this.popover()
     }, this.delayValue)
   }
 
   hide() {
     setTimeout(() => {
-      // this.popoverTarget.style.display = "none"
-      this.popoverTarget.dataset.state = "closed"
-      this.popoverTarget.classList.add("opacity-0")
-      this.popoverTarget.classList.remove("opacity-100")
-      // console.log(`changed to ${this.popoverTarget.dataset.state}`)
+      // this.contentTarget.style.display = "none"
+      this.contentTarget.dataset.state = "closed"
+      this.contentTarget.classList.add("opacity-0")
+      this.contentTarget.classList.remove("opacity-100")
+      // console.log(`changed to ${this.contentTarget.dataset.state}`)
     }, this.delayOutValue)
   }
 
@@ -70,8 +68,8 @@ export default class extends Controller {
   }
 
   popover() {
-    const button = this.element
-    const popover = this.popoverTarget
+    const button = this.buttonTarget
+    const popover = this.contentTarget
     const arrowElement = this.arrowTarget
 
     computePosition(button, popover, {

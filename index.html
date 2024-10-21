@@ -7,32 +7,34 @@
     <title>Vite App</title>
   </head>
   <body class="p-96 bg-gray-100">
-    <div>
+    <div
+      data-controller="popover"
+      data-popover-position-value="bottom"
+      data-popover-offset-value="20"
+      data-popover-mode-value="click"
+      data-popover-delay-value="1000"
+      data-popover-delay-out-value="1000"
+    >
       <button
-        data-controller="popover"
-        class="bg-indigo-500 px-4 py-3 rounded-xl"
         data-action="popover#show"
-        data-popover-position-value="bottom"
-        data-popover-offset-value="20"
-        data-popover-delay-value="0"
-        data-popover-delay-out-value="0"
-        data-popover-mode-value="hover"
+        class="bg-indigo-500 px-4 py-3 rounded-xl"
+        data-popover-target="button"
       >
         <span class="text-white font-medium">Popover!</span>
-        <div
-          role="tooltip"
-          class="rounded-xl p-4 absolute top-0 left-0 bg-white dark:bg-stone-800 shadow max-w-96 transition-opacity duration-300 opacity-0 hidden"
-          data-popover-target="popover"
-        >
-          Nisi aute magna pariatur cupidatat irure aliqua quis sunt. Adipisicing
-          tempor ullamco sit ipsum consequat duis veniam Lorem. Lorem enim
-          voluptate non ea esse ipsum laborum.
-          <div
-            class="absolute size-5 bg-white dark:bg-stone-800 rotate-45"
-            data-popover-target="arrow"
-          ></div>
-        </div>
       </button>
+      <div
+        role="tooltip"
+        class="rounded-xl p-4 absolute top-0 left-0 bg-white dark:bg-stone-800 shadow max-w-96 transition-opacity duration-300 ease-in-out opacity-0 hidden text-gray-500"
+        data-popover-target="content"
+      >
+        Nisi aute magna pariatur cupidatat irure aliqua quis sunt. Adipisicing a
+        tempor ullamco sit ipsum consequat duis veniam Lorem. Lorem enim
+        voluptate non ea esse ipsum laborum.
+        <div
+          class="absolute size-5 bg-white dark:bg-stone-800 rotate-45"
+          data-popover-target="arrow"
+        ></div>
+      </div>
     </div>
 
     <script type="module" src="src/main.js"></script>
