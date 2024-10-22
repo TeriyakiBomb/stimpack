@@ -6,55 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
   </head>
-  <body class="p-96 bg-gray-100">
-    <div
-      data-controller="popover"
-      data-popover-position-value="bottom"
-      data-popover-offset-value="20"
-      data-popover-delay-value="0"
-      data-popover-delay-out-value="0"
-    >
-      <button
-        data-action="click->popover#toggle"
-        class="bg-indigo-500 px-4 py-3 rounded-xl"
-        data-popover-target="button"
-      >
-        <span class="text-white font-medium">Popover!</span>
-      </button>
+  <body class="p-64 bg-gray-100">
+    <div class="flex flex-col space-y-4">
       <div
-        role="tooltip"
-        class="rounded-xl p-4 absolute top-0 left-0 bg-white dark:bg-stone-800 shadow max-w-96 transition-opacity duration-200 ease-in-out opacity-0 hidden text-gray-500"
-        data-popover-target="content"
+        data-controller="popover"
+        data-popover-position-value="bottom"
+        data-popover-offset-value="20"
+        data-popover-delay-value="0"
+        data-popover-delay-out-value="0"
       >
-        I am some words. Woop!
+        <button
+          data-action="click->popover#toggle"
+          class="bg-indigo-500 px-4 py-3 rounded-xl"
+          data-popover-target="button"
+        >
+          <span class="text-white font-medium">Popover!</span>
+        </button>
         <div
-          class="absolute size-5 bg-white dark:bg-stone-800 rotate-45"
-          data-popover-target="arrow"
-        ></div>
+          role="tooltip"
+          class="rounded-xl p-4 absolute top-0 left-0 bg-white dark:bg-stone-800 shadow max-w-96 transition-opacity duration-200 ease-in-out opacity-0 hidden text-gray-500 z-50"
+          data-popover-target="content"
+        >
+          I am some words. Woop!
+          <div
+            class="absolute size-5 bg-white dark:bg-stone-800 rotate-45"
+            data-popover-target="arrow"
+          ></div>
+        </div>
+      </div>
+
+      <div
+        data-controller="color-picker"
+        data-color-picker-theme-value="polaroid"
+        data-color-picker-swatches-value='["#264653",
+        "#2a9d8f",
+        "#e9c46a",
+        "rgb(244,162,97)",
+        "#e76f51",
+        "#d62828",
+        "navy",
+        "#07b",
+        "#0096c7",
+        "#00b4d880",
+        "rgba(0,119,182,0.8)"]'
+      >
+        <input
+          data-color-picker-target="input"
+          type="text"
+          placeholder="Pick a color"
+        />
       </div>
     </div>
 
-    <div
-      data-controller="color-picker"
-      data-color-picker-swatches-value='["#264653",
-      "#2a9d8f",
-      "#e9c46a",
-      "rgb(244,162,97)",
-      "#e76f51",
-      "#d62828",
-      "navy",
-      "#07b",
-      "#0096c7",
-      "#00b4d880",
-      "rgba(0,119,182,0.8)"]'
-    >
-      <input
-        data-color-picker-target="input"
-        type="text"
-        placeholder="Pick a color"
-      />
-    </div>
-
     <script type="module" src="src/main.js"></script>
+    <style>
+      .clr-field input {
+        @apply py-2 px-2.5 border rounded-lg h-12;
+      }
+      .clr-field button {
+        @apply rounded-full size-8 mr-2;
+      }
+    </style>
   </body>
 </html>
