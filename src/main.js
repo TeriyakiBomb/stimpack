@@ -1,4 +1,5 @@
 import "../style.css"
+import "@melloware/coloris/dist/coloris.css"
 
 import { Application } from "@hotwired/stimulus"
 import StimulusControllerResolver, {
