@@ -8,6 +8,7 @@ export default class extends Controller {
   static values = {
     position: { type: String, default: "bottom" },
     offset: { type: Number, default: 20 },
+    padding: { type: Number, default: 20 },
     mode: String,
     delay: { type: Number, default: 0 },
     delayOut: { type: Number, default: 0 },
@@ -84,8 +85,12 @@ export default class extends Controller {
     computePosition(button, popover, {
       placement: this.positionValue,
       middleware: [
-        arrow({ element: arrowElement }, shift()),
+        shift({
+          padding: this.paddingValue,
+        }),
+        // autoPlacement(),
         offset(this.offsetValue),
+        arrow({ element: arrowElement }),
       ],
     }).then(({ x, y, placement, middlewareData }) => {
       Object.assign(popover.style, {
