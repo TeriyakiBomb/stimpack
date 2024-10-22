@@ -7,6 +7,8 @@ export default class extends Controller {
   static values = {
     swatches: Array,
     margin: { type: Number, default: 12 },
+    theme: { type: String, default: "Default" },
+    options: Object,
   }
 
   connect() {
@@ -15,7 +17,7 @@ export default class extends Controller {
       el: this.inputTarget,
       swatches: this.swatchesValue,
       margin: this.marginValue,
-      theme: "polaroid",
+      theme: this.themeValue,
     })
     console.log(this.swatchesValue)
   }
