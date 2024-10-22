@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { computePosition, arrow, offset } from "@floating-ui/dom"
+import { computePosition, arrow, offset, shift } from "@floating-ui/dom"
 import { useClickOutside, useHover } from "stimulus-use"
 
 export default class extends Controller {
@@ -83,7 +83,10 @@ export default class extends Controller {
 
     computePosition(button, popover, {
       placement: this.positionValue,
-      middleware: [arrow({ element: arrowElement }), offset(this.offsetValue)],
+      middleware: [
+        arrow({ element: arrowElement }, shift()),
+        offset(this.offsetValue),
+      ],
     }).then(({ x, y, placement, middlewareData }) => {
       Object.assign(popover.style, {
         left: `${x}px`,
