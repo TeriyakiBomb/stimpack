@@ -58,13 +58,41 @@
       </div>
     </div>
 
+    <div
+      data-controller="toast"
+      data-toast-target="toast"
+      data-hide-class="translate-y-full"
+      class="flex flex-col space-y-3 right-4 transition fixed bottom-4 p-4 rounded shadow bg-white stimpack--toast-hide"
+    >
+      <span class="text-gray-500 text-sm">Hello, I am a toast</span>
+      <div
+        data-action="click->countdown#startCountdown"
+        class="w-full bg-gray-100 rounded-full h-1.5 dark:bg-gray-700"
+      >
+        <div
+          class="bg-indigo-500 h-1.5 rounded-full stimpack--toast-bar"
+          data-toast-target="bar"
+          style="width: 100%"
+        ></div>
+      </div>
+    </div>
+
     <script type="module" src="src/main.js"></script>
     <style>
+      .stimpack--toast-bar {
+        transition: width 1s linear;
+      }
       .clr-field input {
         @apply py-2 px-2.5 border rounded-lg h-12;
       }
       .clr-field button {
         @apply rounded-full size-8 mr-2;
+      }
+      .stimpack--toast-show {
+        @apply delay-500 translate-y-0 ease-in-out duration-700 opacity-100;
+      }
+      .stimpack--toast-hide {
+        @apply translate-y-full ease-in-out duration-700 opacity-0;
       }
     </style>
   </body>
